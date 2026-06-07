@@ -1,0 +1,186 @@
+[
+  {
+    "company_id": "dbs",
+    "company_name": "DBS",
+    "sector": "Banking",
+    "country": "Singapore",
+    "current_esg_score": 72,
+    "news_articles": [
+      {"title": "DBS expands green financing programme", "date": "2026-06-01", "source": "Demo News", "text": "DBS announced new green financing initiatives to support renewable projects and sustainable bonds."},
+      {"title": "DBS strengthens governance for AI banking tools", "date": "2026-05-18", "source": "Demo Markets", "text": "The bank introduced responsible AI controls, model governance, and cybersecurity investments."},
+      {"title": "DBS backs solar infrastructure across ASEAN", "date": "2026-04-25", "source": "Demo Finance", "text": "New financing supports renewable energy and low carbon transition projects."}
+    ],
+    "job_signals": {"sustainability_jobs": 16, "ai_jobs": 26, "cybersecurity_jobs": 12, "data_governance_jobs": 9},
+    "innovation_signals": {"green_patents": 5, "digital_patents": 8, "sustainability_projects": 7},
+    "risk_signals": {"controversies": 1, "regulatory_flags": 0, "negative_news_count": 1, "labour_issues": 0, "environmental_incidents": 0, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "ocbc",
+    "company_name": "OCBC",
+    "sector": "Banking",
+    "country": "Singapore",
+    "current_esg_score": 70,
+    "news_articles": [
+      {"title": "OCBC launches transition finance framework", "date": "2026-05-28", "source": "Demo News", "text": "OCBC expanded green lending and climate transition financing for corporate clients."},
+      {"title": "OCBC invests in data governance hiring", "date": "2026-05-03", "source": "Demo Careers", "text": "New roles focus on data governance, AI risk, and responsible technology."}
+    ],
+    "job_signals": {"sustainability_jobs": 11, "ai_jobs": 18, "cybersecurity_jobs": 10, "data_governance_jobs": 8},
+    "innovation_signals": {"green_patents": 3, "digital_patents": 5, "sustainability_projects": 5},
+    "risk_signals": {"controversies": 1, "regulatory_flags": 0, "negative_news_count": 1, "labour_issues": 0, "environmental_incidents": 0, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "uob",
+    "company_name": "UOB",
+    "sector": "Banking",
+    "country": "Singapore",
+    "current_esg_score": 68,
+    "news_articles": [
+      {"title": "UOB increases SME sustainability loans", "date": "2026-05-16", "source": "Demo News", "text": "UOB increased sustainability-linked lending and green building finance for SMEs."},
+      {"title": "UOB flags cautious exposure review", "date": "2026-04-22", "source": "Demo Markets", "text": "Analysts noted moderate exposure to transition-sensitive sectors."}
+    ],
+    "job_signals": {"sustainability_jobs": 9, "ai_jobs": 14, "cybersecurity_jobs": 7, "data_governance_jobs": 5},
+    "innovation_signals": {"green_patents": 2, "digital_patents": 4, "sustainability_projects": 4},
+    "risk_signals": {"controversies": 1, "regulatory_flags": 1, "negative_news_count": 2, "labour_issues": 0, "environmental_incidents": 0, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "singtel",
+    "company_name": "Singtel",
+    "sector": "Telecommunications",
+    "country": "Singapore",
+    "current_esg_score": 74,
+    "news_articles": [
+      {"title": "Singtel deploys energy efficient network upgrades", "date": "2026-06-02", "source": "Demo Tech", "text": "Singtel upgraded network infrastructure to reduce energy intensity and emissions."},
+      {"title": "Singtel expands cybersecurity services", "date": "2026-05-13", "source": "Demo Tech", "text": "The company expanded cybersecurity, data protection, and cloud resilience services."}
+    ],
+    "job_signals": {"sustainability_jobs": 10, "ai_jobs": 22, "cybersecurity_jobs": 20, "data_governance_jobs": 7},
+    "innovation_signals": {"green_patents": 3, "digital_patents": 9, "sustainability_projects": 6},
+    "risk_signals": {"controversies": 1, "regulatory_flags": 0, "negative_news_count": 1, "labour_issues": 0, "environmental_incidents": 0, "cybersecurity_incidents": 1}
+  },
+  {
+    "company_id": "grab",
+    "company_name": "Grab",
+    "sector": "Technology",
+    "country": "Singapore",
+    "current_esg_score": 61,
+    "news_articles": [
+      {"title": "Grab expands EV fleet incentives", "date": "2026-06-03", "source": "Demo Mobility", "text": "Grab announced electric vehicle incentives, driver sustainability programmes, and emissions reduction tools."},
+      {"title": "Grab adds AI safety and data governance roles", "date": "2026-05-20", "source": "Demo Careers", "text": "New hiring includes responsible AI, cybersecurity, and data governance positions."},
+      {"title": "Grab pilots low carbon delivery hubs", "date": "2026-04-29", "source": "Demo Mobility", "text": "The pilot supports sustainable logistics and lower delivery emissions."}
+    ],
+    "job_signals": {"sustainability_jobs": 13, "ai_jobs": 31, "cybersecurity_jobs": 11, "data_governance_jobs": 10},
+    "innovation_signals": {"green_patents": 4, "digital_patents": 11, "sustainability_projects": 8},
+    "risk_signals": {"controversies": 1, "regulatory_flags": 0, "negative_news_count": 1, "labour_issues": 1, "environmental_incidents": 0, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "sea",
+    "company_name": "Sea Limited",
+    "sector": "Technology",
+    "country": "Singapore",
+    "current_esg_score": 63,
+    "news_articles": [
+      {"title": "Sea Limited increases cloud efficiency projects", "date": "2026-05-30", "source": "Demo Tech", "text": "Sea Limited announced energy efficient data infrastructure and digital inclusion initiatives."},
+      {"title": "Sea expands AI governance hiring", "date": "2026-05-09", "source": "Demo Careers", "text": "Hiring signals include AI platform governance, cybersecurity, and privacy roles."}
+    ],
+    "job_signals": {"sustainability_jobs": 9, "ai_jobs": 34, "cybersecurity_jobs": 13, "data_governance_jobs": 9},
+    "innovation_signals": {"green_patents": 3, "digital_patents": 12, "sustainability_projects": 5},
+    "risk_signals": {"controversies": 1, "regulatory_flags": 1, "negative_news_count": 2, "labour_issues": 0, "environmental_incidents": 0, "cybersecurity_incidents": 1}
+  },
+  {
+    "company_id": "wilmar",
+    "company_name": "Wilmar",
+    "sector": "Agribusiness",
+    "country": "Singapore",
+    "current_esg_score": 58,
+    "news_articles": [
+      {"title": "Wilmar faces renewed supply chain scrutiny", "date": "2026-05-25", "source": "Demo Commodities", "text": "Reports raised concerns about deforestation risk, supplier governance, and environmental incidents."},
+      {"title": "Wilmar publishes traceability update", "date": "2026-04-14", "source": "Demo ESG", "text": "Wilmar reported progress on traceability but investors remain cautious."}
+    ],
+    "job_signals": {"sustainability_jobs": 6, "ai_jobs": 6, "cybersecurity_jobs": 3, "data_governance_jobs": 2},
+    "innovation_signals": {"green_patents": 1, "digital_patents": 2, "sustainability_projects": 3},
+    "risk_signals": {"controversies": 2, "regulatory_flags": 1, "negative_news_count": 3, "labour_issues": 1, "environmental_incidents": 2, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "capitaland",
+    "company_name": "CapitaLand",
+    "sector": "Real Estate",
+    "country": "Singapore",
+    "current_esg_score": 76,
+    "news_articles": [
+      {"title": "CapitaLand expands green building retrofits", "date": "2026-05-31", "source": "Demo Property", "text": "CapitaLand accelerated green building retrofits, energy monitoring, and sustainability-linked financing."},
+      {"title": "CapitaLand pilots smart energy analytics", "date": "2026-05-07", "source": "Demo Property", "text": "Digital tools support data-driven energy efficiency and tenant emissions reporting."}
+    ],
+    "job_signals": {"sustainability_jobs": 12, "ai_jobs": 10, "cybersecurity_jobs": 6, "data_governance_jobs": 6},
+    "innovation_signals": {"green_patents": 4, "digital_patents": 5, "sustainability_projects": 8},
+    "risk_signals": {"controversies": 0, "regulatory_flags": 0, "negative_news_count": 1, "labour_issues": 0, "environmental_incidents": 0, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "aia",
+    "company_name": "AIA",
+    "sector": "Insurance",
+    "country": "Hong Kong / ASEAN",
+    "current_esg_score": 71,
+    "news_articles": [
+      {"title": "AIA links health products to climate resilience", "date": "2026-05-21", "source": "Demo Insurance", "text": "AIA expanded sustainable investment screens and climate risk analytics."},
+      {"title": "AIA increases responsible AI governance", "date": "2026-04-30", "source": "Demo Tech", "text": "The insurer added model risk controls and responsible AI oversight."}
+    ],
+    "job_signals": {"sustainability_jobs": 8, "ai_jobs": 17, "cybersecurity_jobs": 9, "data_governance_jobs": 8},
+    "innovation_signals": {"green_patents": 2, "digital_patents": 6, "sustainability_projects": 5},
+    "risk_signals": {"controversies": 1, "regulatory_flags": 0, "negative_news_count": 1, "labour_issues": 0, "environmental_incidents": 0, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "keppel",
+    "company_name": "Keppel",
+    "sector": "Infrastructure",
+    "country": "Singapore",
+    "current_esg_score": 69,
+    "news_articles": [
+      {"title": "Keppel grows renewable infrastructure portfolio", "date": "2026-05-27", "source": "Demo Infrastructure", "text": "Keppel expanded renewable assets, district cooling, and decarbonisation projects."},
+      {"title": "Keppel strengthens governance remediation", "date": "2026-04-18", "source": "Demo Governance", "text": "Governance programmes continue after historical controversy concerns."}
+    ],
+    "job_signals": {"sustainability_jobs": 12, "ai_jobs": 18, "cybersecurity_jobs": 8, "data_governance_jobs": 6},
+    "innovation_signals": {"green_patents": 5, "digital_patents": 6, "sustainability_projects": 7},
+    "risk_signals": {"controversies": 2, "regulatory_flags": 1, "negative_news_count": 2, "labour_issues": 0, "environmental_incidents": 1, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "sembcorp",
+    "company_name": "Sembcorp",
+    "sector": "Energy",
+    "country": "Singapore",
+    "current_esg_score": 66,
+    "news_articles": [
+      {"title": "Sembcorp accelerates renewables buildout", "date": "2026-06-04", "source": "Demo Energy", "text": "Sembcorp announced new solar, wind, and energy storage projects across Asia."},
+      {"title": "Sembcorp adds grid analytics patents", "date": "2026-05-12", "source": "Demo Innovation", "text": "New patents cover digital grid controls and clean energy optimisation."}
+    ],
+    "job_signals": {"sustainability_jobs": 14, "ai_jobs": 17, "cybersecurity_jobs": 8, "data_governance_jobs": 6},
+    "innovation_signals": {"green_patents": 8, "digital_patents": 7, "sustainability_projects": 9},
+    "risk_signals": {"controversies": 1, "regulatory_flags": 1, "negative_news_count": 1, "labour_issues": 0, "environmental_incidents": 1, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "comfortdelgro",
+    "company_name": "ComfortDelGro",
+    "sector": "Transport",
+    "country": "Singapore",
+    "current_esg_score": 64,
+    "news_articles": [
+      {"title": "ComfortDelGro expands electric taxi fleet", "date": "2026-05-26", "source": "Demo Mobility", "text": "ComfortDelGro expanded electric taxis, charging partnerships, and low emission operations."},
+      {"title": "ComfortDelGro reviews driver welfare issues", "date": "2026-04-20", "source": "Demo Labour", "text": "The company responded to driver welfare and labour issue concerns."}
+    ],
+    "job_signals": {"sustainability_jobs": 9, "ai_jobs": 8, "cybersecurity_jobs": 4, "data_governance_jobs": 3},
+    "innovation_signals": {"green_patents": 3, "digital_patents": 3, "sustainability_projects": 6},
+    "risk_signals": {"controversies": 2, "regulatory_flags": 1, "negative_news_count": 2, "labour_issues": 2, "environmental_incidents": 0, "cybersecurity_incidents": 0}
+  },
+  {
+    "company_id": "thai_union",
+    "company_name": "Thai Union",
+    "sector": "Food & Agriculture",
+    "country": "Thailand",
+    "current_esg_score": 57,
+    "news_articles": [
+      {"title": "Thai Union faces labour sourcing investigation", "date": "2026-05-24", "source": "Demo Food", "text": "Investigators raised labour issue, supplier governance, and traceability concerns."},
+      {"title": "Thai Union invests in seafood traceability", "date": "2026-04-11", "source": "Demo ESG", "text": "The company announced digital traceability initiatives and sustainability projects."}
+    ],
+    "job_signals": {"sustainability_jobs": 5, "ai_jobs": 4, "cybersecurity_jobs": 2, "data_governance_jobs": 2},
+    "innovation_signals": {"green_patents": 2, "digital_patents": 2, "sustainability_projects": 4},
+    "risk_signals": {"controversies": 5, "regulatory_flags": 3, "negative_news_count": 6, "labour_issues": 4, "environmental_incidents": 1, "cybersecurity_incidents": 0}
+  }
+]

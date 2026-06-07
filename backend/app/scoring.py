@@ -350,6 +350,7 @@ def analyse_company(company: dict[str, Any], live_articles: list[dict[str, str]]
         "sector": company["sector"],
         "country": company["country"],
         "analysis_date": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "signals_detected": signal_counts(source_company, enriched),
         "confidence_score": confidence,
         "recommendation": recommendation["label"],
         "recommendation_explanation": recommendation["explanation"],
@@ -401,6 +402,92 @@ def analyse_company(company: dict[str, Any], live_articles: list[dict[str, str]]
             "Compare this company to DBS.",
         ],
     }
+
+
+def build_company_from_live_signals(company_name: str, live_articles: list[dict[str, str]]) -> dict[str, Any]:
+    text = " ".join(f"{article.get('title', '')} {article.get('text', '')}" for article in live_articles)
+    positive = count_terms(text, POSITIVE_TERMS)
+    negative = count_terms(text, NEGATIVE_TERMS)
+    digital = count_terms(text, RESPONSIBLE_AI_TERMS | {"ai", "cybersecurity", "data governance", "digital", "automation"})
+    green = count_terms(text, {"green", "renewable", "solar", "wind", "carbon", "climate"})
+    current_score = clamp(58 + positive * 3 - negative * 4 + min(8, digital), 35, 82)
+    return {
+        "company_id": company_name.lower().replace(" ", "_").replace(".", ""),
+        "company_name": company_name.strip().title(),
+        "sector": "Live Search",
+        "country": "Global",
+        "current_esg_score": current_score,
+        "news_articles": live_articles,
+        "job_signals": {
+            "sustainability_jobs": max(1, positive + green),
+            "ai_jobs": max(1, digital),
+            "cybersecurity_jobs": count_terms(text, {"cybersecurity", "cyber", "security", "privacy"}),
+            "data_governance_jobs": count_terms(text, {"data governance", "privacy", "responsible ai", "model governance"}),
+        },
+        "innovation_signals": {
+            "green_patents": max(0, green),
+            "digital_patents": max(0, digital),
+            "sustainability_projects": max(1, positive),
+        },
+        "risk_signals": {
+            "controversies": count_terms(text, {"controversy", "lawsuit", "probe", "investigation"}),
+            "regulatory_flags": count_terms(text, {"regulator", "regulatory", "fine", "penalty"}),
+            "negative_news_count": max(0, negative),
+            "labour_issues": count_terms(text, {"labour", "labor", "worker", "union", "safety"}),
+            "environmental_incidents": count_terms(text, {"pollution", "spill", "deforestation", "emissions"}),
+            "cybersecurity_incidents": count_terms(text, {"breach", "cyberattack", "data leak"}),
+        },
+    }
+
+
+def mock_signal_articles(company_name: str) -> list[dict[str, str]]:
+    clean_name = canonical_company_name(company_name)
+    return [
+        {
+            "title": f"{clean_name} expands sustainability financing and transition initiatives",
+            "date": "2026-06-03",
+            "source": "Seeded Mock News",
+            "url": "",
+            "text": f"{clean_name} announced green financing, renewable energy, and sustainability initiatives that indicate improving ESG momentum.",
+        },
+        {
+            "title": f"{clean_name} increases AI governance and cybersecurity hiring",
+            "date": "2026-06-01",
+            "source": "Seeded Mock Careers Signal",
+            "url": "",
+            "text": f"Job signals show AI, cybersecurity, data governance, privacy, and responsible AI roles linked to digital ESG readiness.",
+        },
+        {
+            "title": f"Analysts monitor {clean_name} governance and supply chain disclosures",
+            "date": "2026-05-28",
+            "source": "Seeded Mock Disclosure",
+            "url": "",
+            "text": f"Governance, labour, regulatory, and supply chain risk disclosures are being monitored, with no severe controversy signal detected.",
+        },
+        {
+            "title": f"{clean_name} pilots low-carbon operations programme",
+            "date": "2026-05-22",
+            "source": "Seeded Mock Sustainability",
+            "url": "",
+            "text": f"The company reported carbon reduction, energy efficiency, and sustainable operations programmes.",
+        },
+    ]
+
+
+def canonical_company_name(company_name: str) -> str:
+    normalized = (company_name or "Target Company").strip().lower()
+    aliases = {
+        "dbs": "DBS Bank",
+        "dbs bank": "DBS Bank",
+        "sea": "Sea Ltd",
+        "sea ltd": "Sea Ltd",
+        "sea limited": "Sea Ltd",
+        "wilmar": "Wilmar International",
+        "wilmar international": "Wilmar International",
+        "singtel": "Singtel",
+        "grab": "Grab",
+    }
+    return aliases.get(normalized, (company_name or "Target Company").strip().title())
 
 
 def analyse_report(file_name: str, text: str) -> dict[str, Any]:
@@ -466,6 +553,20 @@ def compare_companies(companies: list[dict[str, Any]]) -> dict[str, Any]:
         "most_digitally_advanced_company": max(rows, key=lambda row: row["digital_esg"])["company_name"],
         "most_improved_company": max(rows, key=lambda row: row["momentum"])["company_name"],
         "mode": "Demo Dataset Mode",
+    }
+
+
+def signal_counts(company: dict[str, Any], enriched: dict[str, Any]) -> dict[str, int]:
+    text = article_blob(company)
+    articles = len(company.get("news_articles", []))
+    sustainability = count_terms(text, POSITIVE_TERMS)
+    digital = count_terms(text, RESPONSIBLE_AI_TERMS | {"ai", "cybersecurity", "data governance", "digital"})
+    risk = count_terms(text, NEGATIVE_TERMS) + int(enriched["risk_score"] >= 40)
+    return {
+        "articles_found": articles,
+        "sustainability_announcements": sustainability,
+        "ai_hiring_signals": digital + company.get("job_signals", {}).get("ai_jobs", 0),
+        "regulatory_disclosures": risk + company.get("risk_signals", {}).get("regulatory_flags", 0),
     }
 
 
@@ -640,4 +741,3 @@ def build_digital_readiness(enriched: dict[str, Any]) -> str:
         f"({enriched['breakdown']['ai_adoption']}), cybersecurity ({enriched['breakdown']['cybersecurity']}), "
         f"and data governance ({enriched['breakdown']['data_governance']})."
     )
-

@@ -392,6 +392,7 @@ def analyse_company(company: dict[str, Any], live_articles: list[dict[str, str]]
         },
         "breakdown": enriched["breakdown"],
         "trend": enriched["momentum_trend"],
+        "timeline": build_signal_timeline(source_company, enriched),
         "evidence": evidence,
         "suggested_questions": [
             f"Why is {company['company_name']} a hidden winner?",
@@ -491,6 +492,52 @@ def answer_question(analysis: dict[str, Any], question: str) -> dict[str, Any]:
         )
         evidence = analysis["evidence"]["source_articles"][:3]
     return {"answer": answer, "evidence": evidence, "mode": analysis.get("mode", "Demo Dataset Mode")}
+
+
+def build_signal_timeline(company: dict[str, Any], enriched: dict[str, Any]) -> list[dict[str, Any]]:
+    events = []
+    for article in company.get("news_articles", []):
+        text = f"{article.get('title', '')} {article.get('text', '')}"
+        positive = count_terms(text, POSITIVE_TERMS)
+        negative = count_terms(text, NEGATIVE_TERMS)
+        if negative > positive:
+            impact = "Risk score pressure"
+            category = "Risk"
+            direction = "negative"
+        elif count_terms(text, RESPONSIBLE_AI_TERMS | {"ai", "cybersecurity", "data governance", "digital"}) > 0:
+            impact = "Digital ESG contribution"
+            category = "Digital ESG"
+            direction = "positive"
+        else:
+            impact = "Momentum score contribution"
+            category = "Momentum"
+            direction = "positive"
+        events.append(
+            {
+                "date": article.get("date", ""),
+                "title": article.get("title", "ESG signal detected"),
+                "source": article.get("source", "Source"),
+                "category": category,
+                "impact": impact,
+                "direction": direction,
+                "score_effect": "+ momentum" if direction == "positive" else "+ risk",
+                "reason": article.get("text", "")[:220] or impact,
+            }
+        )
+    if not events:
+        events.append(
+            {
+                "date": date.today().isoformat(),
+                "title": "Analysis generated from cached company signals",
+                "source": "ESG Pulse 360",
+                "category": "Analysis",
+                "impact": "Baseline intelligence generated",
+                "direction": "neutral",
+                "score_effect": "baseline",
+                "reason": build_outlook(enriched),
+            }
+        )
+    return sorted(events, key=lambda item: item.get("date", ""), reverse=True)
 
 
 def score_payload(score: int, confidence: int, explanation: str, evidence: list[dict[str, str]], sources: list[str], level: str | None = None) -> dict[str, Any]:
@@ -593,5 +640,4 @@ def build_digital_readiness(enriched: dict[str, Any]) -> str:
         f"({enriched['breakdown']['ai_adoption']}), cybersecurity ({enriched['breakdown']['cybersecurity']}), "
         f"and data governance ({enriched['breakdown']['data_governance']})."
     )
-
 

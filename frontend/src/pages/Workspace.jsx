@@ -1,4 +1,4 @@
-import { BrainCircuit, Calendar, Target } from "lucide-react";
+import { BrainCircuit, Calendar, Save, Target } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import AssistantPanel from "../components/intelligence/AssistantPanel.jsx";
 import EvidenceList from "../components/intelligence/EvidenceList.jsx";
@@ -8,7 +8,7 @@ import PageHeader from "../components/ui/PageHeader.jsx";
 
 const tabs = ["Executive Summary", "Momentum Analysis", "Hidden Winner Analysis", "ESG Risk Radar", "Digital ESG Intelligence", "Source Evidence"];
 
-export default function Workspace({ analysis, activeTab, setActiveTab, navigate }) {
+export default function Workspace({ analysis, activeTab, setActiveTab, navigate, onSave }) {
   if (!analysis) {
     return (
       <div className="space-y-6">
@@ -29,7 +29,12 @@ export default function Workspace({ analysis, activeTab, setActiveTab, navigate 
   return (
     <div className="grid gap-5 xl:grid-cols-[1fr_380px]">
       <div className="space-y-5">
-        <PageHeader eyebrow={analysis.mode} title={analysis.company_name} description="Generated ESG intelligence with traceable scores, source evidence and AI assistant support." />
+        <PageHeader
+          eyebrow={analysis.mode}
+          title={analysis.company_name}
+          description="Generated ESG intelligence with traceable scores, source evidence and AI assistant support."
+          action={<button onClick={onSave} className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 font-semibold text-white"><Save className="h-4 w-4" />Save Analysis</button>}
+        />
         {analysis.mode === "Demo Dataset Mode" && (
           <div className="rounded-lg border border-amber-300/25 bg-amber-300/10 p-3 text-sm font-semibold text-amber-100">
             Demo Dataset Mode: live source collection was unavailable or demo mode was selected.
@@ -48,12 +53,38 @@ export default function Workspace({ analysis, activeTab, setActiveTab, navigate 
         {activeTab === "ESG Risk Radar" && <TraceableScore title="ESG Risk Radar" score={analysis.scores.risk} />}
         {activeTab === "Digital ESG Intelligence" && <DigitalTab analysis={analysis} />}
         {activeTab === "Source Evidence" && <EvidenceList evidence={analysis.evidence} />}
+        <SignalTimeline events={analysis.timeline || []} />
       </div>
       <div className="space-y-5 xl:sticky xl:top-24 xl:self-start">
         <AssistantPanel analysis={analysis} />
         <EvidenceList evidence={{ ...analysis.evidence, source_articles: (analysis.evidence?.source_articles || []).slice(0, 3) }} />
       </div>
     </div>
+  );
+}
+
+function SignalTimeline({ events }) {
+  if (!events.length) return null;
+  return (
+    <GlassCard className="p-5">
+      <h3 className="font-semibold text-slate-950">ESG Signal Timeline</h3>
+      <p className="mt-1 text-sm text-slate-600">What happened, when it happened, and why it affected the analysis.</p>
+      <div className="mt-5 space-y-3">
+        {events.map((event, index) => (
+          <div key={`${event.title}-${index}`} className="grid gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 md:grid-cols-[110px_1fr_190px]">
+            <div className="text-sm font-semibold text-slate-500">{event.date || "No date"}</div>
+            <div>
+              <p className="font-semibold text-slate-950">{event.title}</p>
+              <p className="mt-1 text-sm leading-6 text-slate-600">{event.reason}</p>
+            </div>
+            <div className="text-sm">
+              <p className="font-semibold text-emerald-700">{event.category}</p>
+              <p className="mt-1 text-slate-500">{event.impact}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </GlassCard>
   );
 }
 

@@ -10,6 +10,7 @@ import Roadmap from "./pages/Roadmap.jsx";
 import UploadReport from "./pages/UploadReport.jsx";
 import Workspace from "./pages/Workspace.jsx";
 import { Leaf } from "lucide-react";
+import { loadSavedAnalyses, loadWatchlist, saveAnalysis, toggleWatchlist } from "./utils/storage.js";
 
 const publicRoutes = ["/login"];
 
@@ -22,6 +23,8 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [analysis, setAnalysis] = useState(null);
   const [activeTab, setActiveTab] = useState("Executive Summary");
+  const [savedAnalyses, setSavedAnalyses] = useState(() => loadSavedAnalyses());
+  const [watchlist, setWatchlist] = useState(() => loadWatchlist());
 
   useEffect(() => {
     const onHashChange = () => setRoute(normalizeRoute(window.location.hash));
@@ -89,10 +92,10 @@ export default function App() {
 
   return (
     <AppLayout route={route} navigate={navigate} query={query} setQuery={setQuery}>
-      {route === "/overview" && <Overview companies={companies} summary={summary} navigate={navigate} setAnalysis={setAnalysis} />}
-      {route === "/analyse" && <AnalyseCompany companies={filteredCompanies} setAnalysis={(item) => { setAnalysis(item); setActiveTab("Executive Summary"); }} navigate={navigate} />}
+      {route === "/overview" && <Overview companies={companies} summary={summary} navigate={navigate} savedAnalyses={savedAnalyses} watchlist={watchlist} setAnalysis={setAnalysis} setActiveTab={setActiveTab} />}
+      {route === "/analyse" && <AnalyseCompany companies={filteredCompanies} watchlist={watchlist} toggleWatchlist={(id) => setWatchlist(toggleWatchlist(id))} setAnalysis={(item) => { setAnalysis(item); setActiveTab("Executive Summary"); }} navigate={navigate} />}
       {route === "/upload" && <UploadReport setAnalysis={(item) => { setAnalysis(item); setActiveTab("Executive Summary"); }} navigate={navigate} />}
-      {route === "/workspace" && <Workspace analysis={analysis} activeTab={activeTab} setActiveTab={setActiveTab} navigate={navigate} />}
+      {route === "/workspace" && <Workspace analysis={analysis} activeTab={activeTab} setActiveTab={setActiveTab} navigate={navigate} onSave={() => setSavedAnalyses(saveAnalysis(analysis))} />}
       {route === "/compare" && <CompareCompanies companies={filteredCompanies} />}
       {route === "/roadmap" && <Roadmap />}
     </AppLayout>

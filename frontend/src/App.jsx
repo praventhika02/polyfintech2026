@@ -2,15 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import AppLayout from "./components/layout/AppLayout.jsx";
 import { API_BASE, fallbackCompanies } from "./data/companies.js";
 import { getSummary } from "./utils/scoring.js";
-import Dashboard from "./pages/Dashboard.jsx";
-import DigitalESG from "./pages/DigitalESG.jsx";
-import HiddenWinners from "./pages/HiddenWinners.jsx";
+import AnalyseCompany from "./pages/AnalyseCompany.jsx";
+import CompareCompanies from "./pages/CompareCompanies.jsx";
 import Login from "./pages/Login.jsx";
-import Momentum from "./pages/Momentum.jsx";
 import Overview from "./pages/Overview.jsx";
-import RiskRadar from "./pages/RiskRadar.jsx";
-import CompanyExplorer from "./pages/CompanyExplorer.jsx";
 import Roadmap from "./pages/Roadmap.jsx";
+import UploadReport from "./pages/UploadReport.jsx";
+import Workspace from "./pages/Workspace.jsx";
 import { Leaf } from "lucide-react";
 
 const publicRoutes = ["/login"];
@@ -22,6 +20,8 @@ export default function App() {
   const [summary, setSummary] = useState(getSummary(fallbackCompanies));
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
+  const [analysis, setAnalysis] = useState(null);
+  const [activeTab, setActiveTab] = useState("Executive Summary");
 
   useEffect(() => {
     const onHashChange = () => setRoute(normalizeRoute(window.location.hash));
@@ -56,6 +56,10 @@ export default function App() {
     if (authenticated && route === "/login") {
       window.location.hash = "/overview";
     }
+    const validRoutes = ["/overview", "/analyse", "/upload", "/workspace", "/compare", "/roadmap"];
+    if (authenticated && !validRoutes.includes(route)) {
+      window.location.hash = "/overview";
+    }
   }, [authenticated, route]);
 
   const filteredCompanies = useMemo(() => {
@@ -85,13 +89,11 @@ export default function App() {
 
   return (
     <AppLayout route={route} navigate={navigate} query={query} setQuery={setQuery}>
-      {route === "/overview" && <Overview companies={companies} summary={summary} navigate={navigate} />}
-      {route === "/dashboard" && <Dashboard companies={filteredCompanies} summary={getSummary(filteredCompanies)} navigate={navigate} globalQuery={query} />}
-      {route === "/momentum" && <Momentum companies={filteredCompanies} />}
-      {route === "/hidden-winners" && <HiddenWinners companies={filteredCompanies} />}
-      {route === "/risk-radar" && <RiskRadar companies={filteredCompanies} />}
-      {route === "/digital-esg" && <DigitalESG companies={filteredCompanies} />}
-      {route.startsWith("/company-explorer") && <CompanyExplorer companies={companies} globalQuery={query} />}
+      {route === "/overview" && <Overview companies={companies} summary={summary} navigate={navigate} setAnalysis={setAnalysis} />}
+      {route === "/analyse" && <AnalyseCompany companies={filteredCompanies} setAnalysis={(item) => { setAnalysis(item); setActiveTab("Executive Summary"); }} navigate={navigate} />}
+      {route === "/upload" && <UploadReport setAnalysis={(item) => { setAnalysis(item); setActiveTab("Executive Summary"); }} navigate={navigate} />}
+      {route === "/workspace" && <Workspace analysis={analysis} activeTab={activeTab} setActiveTab={setActiveTab} navigate={navigate} />}
+      {route === "/compare" && <CompareCompanies companies={filteredCompanies} />}
       {route === "/roadmap" && <Roadmap />}
     </AppLayout>
   );

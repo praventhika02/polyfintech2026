@@ -16,7 +16,7 @@ export default function Sidebar({ route, navigate }) {
       <nav className="mt-8 space-y-1">
         {navigationItems.map((item) => {
           const Icon = item.icon;
-          const active = route === item.path || (route.startsWith("/company-explorer") && item.path === "/company-explorer");
+          const active = route === item.path;
           return (
             <button
               key={item.path}
@@ -34,8 +34,8 @@ export default function Sidebar({ route, navigate }) {
         })}
       </nav>
       <div className="absolute bottom-4 left-4 right-4 rounded-lg border border-emerald-300/15 bg-emerald-300/5 p-4">
-        <p className="text-sm font-semibold text-emerald-200">Live ESG Signals</p>
-        <p className="mt-1 text-xs leading-5 text-slate-500">Alternative data refresh layer ready for LLM enrichment.</p>
+        <p className="text-sm font-semibold text-emerald-200">Investigation Mode</p>
+        <p className="mt-1 text-xs leading-5 text-slate-500">Search, upload, analyse, ask questions, compare evidence.</p>
       </div>
     </aside>
   );

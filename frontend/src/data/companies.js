@@ -1,28 +1,26 @@
 import {
   AlertTriangle,
-  BarChart3,
   BrainCircuit,
   Building2,
+  Files,
   LayoutDashboard,
   Leaf,
   Map,
-  Radar,
   Rocket,
   Search,
   ShieldCheck,
   TrendingUp,
+  UploadCloud,
 } from "lucide-react";
 
 export const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000";
 
 export const navigationItems = [
   { path: "/overview", label: "Overview", icon: LayoutDashboard },
-  { path: "/dashboard", label: "Intelligence Dashboard", icon: BarChart3 },
-  { path: "/momentum", label: "Momentum Engine", icon: TrendingUp },
-  { path: "/hidden-winners", label: "Hidden Winners", icon: Search },
-  { path: "/risk-radar", label: "Risk Radar", icon: Radar },
-  { path: "/digital-esg", label: "Digital ESG", icon: BrainCircuit },
-  { path: "/company-explorer", label: "Company Explorer", icon: Building2 },
+  { path: "/analyse", label: "Analyse Company", icon: Search },
+  { path: "/upload", label: "Upload Report", icon: UploadCloud },
+  { path: "/workspace", label: "Intelligence Workspace", icon: BrainCircuit },
+  { path: "/compare", label: "Compare Companies", icon: Files },
   { path: "/roadmap", label: "Roadmap", icon: Map },
 ];
 

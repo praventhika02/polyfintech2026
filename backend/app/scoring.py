@@ -305,3 +305,6 @@ def build_explanation(company: dict[str, Any], scores: dict[str, Any], risk_reas
             f"{scores['momentum_score']} momentum score and {scores['digital_esg_score']} Digital ESG score."
         )
     return f"{opening} {risk_reason} The signal is generated from demo news, hiring, innovation, and controversy indicators."
+
+
+
